@@ -31,3 +31,23 @@ data Cmd = PushN Int
          | Tothe
          | Mod
   deriving (Eq, Show)
+
+  cmd :: Cmd -> Domain
+
+  cmd (PushN n)
+
+  cmd (PushB b)
+
+  cmd (PushS s)
+
+  cmd Multiply
+
+  cmd Divide
+
+  cmd Add
+
+  cmd Subtract
+
+  cmd Tothe
+
+  cmd Mod
