@@ -19,13 +19,13 @@ by the users.
 
 | Input | Output |
 | --- |---	|
-| run [Push (I 12), Push (I 3), Add] |(Nothing, Just [Left (I 15)]) |
-| run [Push (I 12), Push (I 3), Subtract] |(Nothing, Just [Left (I 9)])|
-| run [Push (I 12), Push (I 3), Multiply] |(Nothing, Just [Left (I 36)])|
-| run [Push (I 12), Push (I 3), Divide] |(Nothing, Just [Left (I 4)])|
-| run [Push (I 12), Push (I 3), Mod] |(Nothing, Just [Left (I 0)])|
-| run [Push (I 12), Push (I 3), ToThe] |(Nothing, Just [Left (I 1729)])|
-| run [Push (I 12), Push (I 3), Mod, PushN 0, IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add]] |(Nothing, Just [Left (I 56)])|
-| run [Push (I 12), Push (S "myString"), Add] | (Nothing, Nothing) |
-| run [Push (S "Hello"), Push (S "World"), Add] | (Nothing, Just [Left (S "HelloWorld")]) |
+| run [Push (I 12), Push (I 3), Add] |Just [Left (I 15)] |
+| run [Push (I 12), Push (I 3), Subtract] |Just [Left (I 9)]|
+| run [Push (I 12), Push (I 3), Multiply] |Just [Left (I 36)]|
+| run [Push (I 12), Push (I 3), Divide] |Just [Left (I 4)]|
+| run [Push (I 12), Push (I 3), Mod] |Just [Left (I 0)]|
+| run [Push (I 12), Push (I 3), ToThe] |Just [Left (I 1729)]|
+| run [Push (I 12), Push (I 3), Mod, PushN 0, IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add]] |Just [Left (I 56)]|
+| run [Push (I 12), Push (S "myString"), Add] | Nothing |
+| run [Push (S "Hello"), Push (S "World"), Add] | Just [Left (S "HelloWorld")] |
 
