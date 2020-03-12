@@ -126,6 +126,11 @@ cmd Mod         = \s -> case s of
                                                                      (I i') -> (Nothing, Just (Left (I (i' `mod` j')) : s'))
                                                                      _ -> (Nothing, Nothing)
                                                        _ -> (Nothing, Nothing)
+cmd Tothe          = \s -> case s of
+                           (Left i : Left j : s') -> case (i,j) of -- Add uses + or ++ based on if string or int
+                                                       (I i', I j') -> (Nothing, Just (Left (I (j' ^ i')) : s'))
+                                                       _ -> (Nothing, Nothing)
+
 
 -- 8. Define the semantics of a StackLang program.
 prog :: Prog -> Domain
