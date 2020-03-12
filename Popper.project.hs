@@ -96,6 +96,9 @@ ex13 = [Push (I 9), Push (I 3), Mod]
 ex14 :: Prog
 ex14 = [Push (I 10), Push (I 3), Mod]
 
+ex15 :: Prog
+ex15 = [Push (I 5), Push (I 3), Tothe]
+
 -- 7. Define the semantics of a StackLang command (ignore If at first).
 cmd :: Cmd -> Domain
 cmd (Push i)     = \s -> (Just (Left i : s))
@@ -142,12 +145,49 @@ prog (c:p) = \s -> case cmd c s of
 -- | Run a program on an initially empty stack.
 --
 --   >>> run ex1
---   (Nothing, Just [Left (S "TestConcatenation")])
---   >>> run (genSum [1..10])
---   Just [Left 55]
+--   Just [Left (S "TestConcatenation")]
 --
---   >>> run [PushN 3, Add, PushN 4]
+--   >>> run ex2
+--   Just [Left (I 12)]
+--
+--   >>> run ex3
+--   Just [Left (I 1)]
+--
+--   >>> run ex4
+--   Just [Left (I 3)]
+--
+--   >>> run ex5
 --   Nothing
 --
+--   >>> run ex6
+--   Nothing
+--
+--   >>> run ex7
+--   Nothing
+--
+--   >>> run ex8
+--   Nothing
+--
+--   >>> run ex9
+--   Nothing
+--
+--   >>> run ex10
+--   Nothing
+--
+--   >>> run ex11
+--   Nothing
+--
+--   >>> run ex12
+--   Nothing
+--
+--   >>> run ex13
+--   Just [Left (I 0)]
+--
+--   >>> run ex14
+--   Just [Left (I 1)]
+--
+--   >>> run ex15
+--   Just [Left (I 125)]
+
 run :: Prog -> (Maybe Stack)
 run p = prog p []
