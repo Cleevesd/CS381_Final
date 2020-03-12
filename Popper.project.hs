@@ -31,3 +31,13 @@ data Cmd = PushN Int
          | Tothe
          | Mod
   deriving (Eq, Show)
+  
+  
+data Type = I Int
+        | B Bool
+        | S String
+  deriving (Eq, Show)
+
+type Stack = [Type]
+
+type Domain = Stack -> Maybe Stack
