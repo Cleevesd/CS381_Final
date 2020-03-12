@@ -90,6 +90,12 @@ ex11 = [Push (S "test"), Push (I 4), Mul]
 ex12 :: Prog
 ex12 = [Push (S "test"), Push (I 4), Div]
 
+ex13 :: Prog
+ex13 = [Push (I 9), Push (I 3), Mod]
+
+ex14 :: Prog
+ex14 = [Push (I 10), Push (I 3), Mod]
+
 -- 7. Define the semantics of a StackLang command (ignore If at first).
 cmd :: Cmd -> Domain
 cmd (Push i)     = \s -> (Nothing, Just (Left i : s))
@@ -114,7 +120,12 @@ cmd Div         = \s -> case s of
                                                                      (I i') -> (Nothing, Just (Left (I (i' `div` j')) : s'))
                                                                      _ -> (Nothing, Nothing)
                                                        _ -> (Nothing, Nothing)
-
+cmd Mod         = \s -> case s of
+                           (Left i : Left j : s') -> case i of
+                                                       (I j') -> case j of
+                                                                     (I i') -> (Nothing, Just (Left (I (i' `mod` j')) : s'))
+                                                                     _ -> (Nothing, Nothing)
+                                                       _ -> (Nothing, Nothing)
 
 -- 8. Define the semantics of a StackLang program.
 prog :: Prog -> Domain
