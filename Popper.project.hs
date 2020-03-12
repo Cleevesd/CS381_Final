@@ -36,7 +36,7 @@ data Cmd = Push Type
          | Equ
          | Tothe
          | Mod
-         | IfElse
+         | IfElse Prog Prog
   deriving (Eq, Show)
   
   
@@ -99,6 +99,15 @@ ex14 = [Push (I 10), Push (I 3), Mod]
 ex15 :: Prog
 ex15 = [Push (I 5), Push (I 3), Tothe]
 
+ex16 :: Prog
+ex16 = [Push (I 5), Push (I 3), Tothe, Push (I 124), Sub]
+
+ex17 :: Prog
+ex17 = [Push (B True), IfElse [Push (I 7), Push (I 8), Mul] [Push (I 3), Push (I 4), Add]]
+
+ex18 :: Prog
+ex18 = [Push (B False), IfElse [Push (I 7), Push (I 8), Mul] [Push (I 3), Push (I 4), Add]]
+
 -- 7. Define the semantics of a StackLang command (ignore If at first).
 cmd :: Cmd -> Domain
 cmd (Push i)     = \s -> Just (Left i : s)
@@ -133,7 +142,9 @@ cmd Tothe          = \s -> case s of
                            (Left i : Left j : s') -> case (i,j) of -- Add uses + or ++ based on if string or int
                                                        (I i', I j') -> Just (Left (I (j' ^ i')) : s')
                                                        _ -> Nothing
-
+cmd (IfElse t f)     = \s -> case s of
+                        (Left (B i) : s') -> if i then prog t s' else prog f s'
+                        _ -> Nothing
 
 -- 8. Define the semantics of a StackLang program.
 prog :: Prog -> Domain
@@ -188,6 +199,14 @@ prog (c:p) = \s -> case cmd c s of
 --
 --   >>> run ex15
 --   Just [Left (I 125)]
-
+--
+--   >>> run ex16
+--   Just [Left (I 1)]
+--
+--   >>> run ex17
+--   Just [Left (I 56)]
+--
+--   >>> run ex18
+--   Just [left (I 7)]
 run :: Prog -> (Maybe Stack)
 run p = prog p []
