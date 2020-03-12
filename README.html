@@ -1076,32 +1076,40 @@ by the users.</p>
 </thead>
 <tbody>
 <tr>
-<td>PushN 12 <br/> PushN 3 <br/> Add</td>
-<td>15</td>
+<td>[Push (I 12), Push (I 3), Add]</td>
+<td>(Nothing, Just [Left (I 15)])</td>
 </tr>
 <tr>
-<td>PushN 12 <br/> PushN 3 <br/> Subtract</td>
-<td>9</td>
+<td>[Push (I 12), Push (I 3), Subtract]</td>
+<td>(Nothing, Just [Left (I 9)])</td>
 </tr>
 <tr>
-<td>PushN 12 <br/> PushN 3 <br/> Multiply</td>
-<td>36</td>
+<td>[Push (I 12), Push (I 3), Multiply]</td>
+<td>(Nothing, Just [Left (I 36)])</td>
 </tr>
 <tr>
-<td>PushN 12 <br/> PushN 3 <br/> Divide</td>
-<td>4</td>
+<td>[Push (I 12), Push (I 3), Divide]</td>
+<td>(Nothing, Just [Left (I 4)])</td>
 </tr>
 <tr>
-<td>PushN 12 <br/> PushN 3 <br/> Mod</td>
-<td>0</td>
+<td>[Push (I 12), Push (I 3), Mod]</td>
+<td>(Nothing, Just [Left (I 0)])</td>
 </tr>
 <tr>
-<td>PushN 12 <br/> PushN 3 <br/> ToThe</td>
-<td>1729</td>
+<td>[Push (I 12), Push (I 3), ToThe]</td>
+<td>(Nothing, Just [Left (I 1729)])</td>
 </tr>
 <tr>
-<td>PushN 12 <br/> PushN 3 <br/> Mod <br/> PushN 0 <br/> IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add] <br/></td>
-<td>56</td>
+<td>[Push (I 12), Push (I 3), Mod, PushN 0, IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add]]</td>
+<td>(Nothing, Just [Left (I 56)])</td>
+</tr>
+<tr>
+<td>[Push (I 12), Push (S &ldquo;myString&rdquo;), Add]</td>
+<td>(Nothing, Nothing)</td>
+</tr>
+<tr>
+<td>[Push (S &ldquo;Hello&rdquo;), Push (S &ldquo;World&rdquo;), Add]</td>
+<td>(Nothing, Just [Left (S &ldquo;HelloWorld&rdquo;)])</td>
 </tr>
 </tbody>
 </table></article></body></html>

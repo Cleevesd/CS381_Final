@@ -19,10 +19,12 @@ by the users.
 
 | Input | Output |
 | --- |---	|
-| PushN 12 <br/> PushN 3 <br/> Add |15 |
-| PushN 12 <br/> PushN 3 <br/> Subtract |9 |
-| PushN 12 <br/> PushN 3 <br/> Multiply |36 |
-| PushN 12 <br/> PushN 3 <br/> Divide |4 |
-| PushN 12 <br/> PushN 3 <br/> Mod |0|
-| PushN 12 <br/> PushN 3 <br/> ToThe |1729|
-| PushN 12 <br/> PushN 3 <br/> Mod <br/> PushN 0 <br/> IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add] <br/> |56|
+| [Push (I 12), Push (I 3), Add] |(Nothing, Just [Left (I 15)]) |
+| [Push (I 12), Push (I 3), Subtract] |(Nothing, Just [Left (I 9)])|
+| [Push (I 12), Push (I 3), Multiply] |(Nothing, Just [Left (I 36)])|
+| [Push (I 12), Push (I 3), Divide] |(Nothing, Just [Left (I 4)])|
+| [Push (I 12), Push (I 3), Mod] |(Nothing, Just [Left (I 0)])|
+| [Push (I 12), Push (I 3), ToThe] |(Nothing, Just [Left (I 1729)])|
+| [Push (I 12), Push (I 3), Mod, PushN 0, IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add]] |(Nothing, Just [Left (I 56)])|
+| [Push (I 12), Push (S "myString"), Add] | (Nothing, Nothing) |
+| [Push (S "Hello"), Push (S "World"), Add] | (Nothing, Just [Left (S "HelloWorld")]) |
