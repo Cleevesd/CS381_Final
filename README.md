@@ -1,19 +1,21 @@
-Name: Ryan Sisco *siscor@oregonstate.edu*
+#Popper
 
-Name: Christopher Miyasako *miyasakc@oregonstate.edu*
+Ryan Sisco *siscor@oregonstate.edu*
 
-Name: Dakota Cleeves *cleevesd@oregonstate.edu*
+Christopher Miyasako *miyasakc@oregonstate.edu*
 
-Name: Tianchi Wu *wutia@oregonstate.edu*
+Dakota Cleeves *cleevesd@oregonstate.edu*
 
-# Intro:
+Tianchi Wu *wutia@oregonstate.edu*
+
+## Intro:
 The language that we will be implementing for this project will 
 called Popper. It will have a Stack-Based language paradigm and
 will be capable of manipulating strings as lists of chars,
 handling int and boolean values, and handling functions created
 by the users.
 
-# Expected Output:
+## Expected Output:
 
 | Input | Output |
 | --- |---	|
