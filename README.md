@@ -1,5 +1,4 @@
-# Popper
-## *a stack based language*
+# Popper - *a stack based language*
 
 Ryan Sisco *siscor@oregonstate.edu*
 
