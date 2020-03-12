@@ -44,7 +44,7 @@ type TypeInt = Int
 
 type Stack = [Either Type TypeInt]
 
-type Domain = Stack -> (Maybe Type, Maybe Stack)
+type Domain = Stack -> (Maybe Stack)
 
 -- String Concatanation
 
@@ -98,46 +98,46 @@ ex14 = [Push (I 10), Push (I 3), Mod]
 
 -- 7. Define the semantics of a StackLang command (ignore If at first).
 cmd :: Cmd -> Domain
-cmd (Push i)     = \s -> (Nothing, Just (Left i : s))
+cmd (Push i)     = \s -> (Just (Left i : s))
 cmd Add          = \s -> case s of
                            (Left i : Left j : s') -> case (i,j) of -- Add uses + or ++ based on if string or int
-                                                       (I i', I j') -> (Nothing, Just (Left (I (j' + i')) : s'))
-                                                       (S i', S j') -> (Nothing, Just (Left (S (j' ++ i')) : s'))
-                                                       _ -> (Nothing, Nothing)
+                                                       (I i', I j') -> (Just (Left (I (j' + i')) : s'))
+                                                       (S i', S j') -> (Just (Left (S (j' ++ i')) : s'))
+                                                       _ -> (Nothing)
 cmd Sub          = \s -> case s of
                            (Left i : Left j : s') -> case (i,j) of -- Add uses + or ++ based on if string or int
-                                                       (I i', I j') -> (Nothing, Just (Left (I (j' - i')) : s'))
-                                                       _ -> (Nothing, Nothing)
+                                                       (I i', I j') -> (Just (Left (I (j' - i')) : s'))
+                                                       _ -> (Nothing)
 cmd Mul          = \s -> case s of
                            (Left i : Left j : s') -> case i of
                                                        (I i') -> case j of
-                                                                     (I j') -> (Nothing, Just (Left (I (j' * i')) : s'))
-                                                                     _ -> (Nothing, Nothing)
-                                                       _ -> (Nothing, Nothing)
+                                                                     (I j') -> (Just (Left (I (j' * i')) : s'))
+                                                                     _ -> (Nothing)
+                                                       _ -> (Nothing)
 cmd Div         = \s -> case s of
                            (Left i : Left j : s') -> case i of
                                                        (I j') -> case j of
-                                                                     (I i') -> (Nothing, Just (Left (I (i' `div` j')) : s'))
-                                                                     _ -> (Nothing, Nothing)
-                                                       _ -> (Nothing, Nothing)
+                                                                     (I i') -> (Just (Left (I (i' `div` j')) : s'))
+                                                                     _ -> (Nothing)
+                                                       _ -> (Nothing)
 cmd Mod         = \s -> case s of
                            (Left i : Left j : s') -> case i of
                                                        (I j') -> case j of
-                                                                     (I i') -> (Nothing, Just (Left (I (i' `mod` j')) : s'))
-                                                                     _ -> (Nothing, Nothing)
-                                                       _ -> (Nothing, Nothing)
+                                                                     (I i') -> (Just (Left (I (i' `mod` j')) : s'))
+                                                                     _ -> (Nothing)
+                                                       _ -> (Nothing)
 cmd Tothe          = \s -> case s of
                            (Left i : Left j : s') -> case (i,j) of -- Add uses + or ++ based on if string or int
-                                                       (I i', I j') -> (Nothing, Just (Left (I (j' ^ i')) : s'))
-                                                       _ -> (Nothing, Nothing)
+                                                       (I i', I j') -> (Just (Left (I (j' ^ i')) : s'))
+                                                       _ -> (Nothing)
 
 
 -- 8. Define the semantics of a StackLang program.
 prog :: Prog -> Domain
-prog []    = \s -> (Nothing, Just s)
+prog []    = \s -> (Just s)
 prog (c:p) = \s -> case cmd c s of
-                     (_, Just s') -> prog p s'
-                     _ -> (Nothing, Nothing)
+                     (Just s') -> prog p s'
+                     _ -> (Nothing)
 
 -- | Run a program on an initially empty stack.
 --
@@ -149,5 +149,5 @@ prog (c:p) = \s -> case cmd c s of
 --   >>> run [PushN 3, Add, PushN 4]
 --   Nothing
 --
-run :: Prog -> (Maybe Type, Maybe Stack)
+run :: Prog -> (Maybe Stack)
 run p = prog p []
