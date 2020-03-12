@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="name" content="Ryan Sisco            ONID: siscor"><style>body {
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body {
   max-width: 980px;
   border: 1px solid #ddd;
   outline: 1300px solid #fff;
@@ -1055,16 +1055,18 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><p>Name: Christopher Miyasako  ONID: miyasakc</p>
-<p>Name: Dakota Cleeves        ONID: cleevesd</p>
-<p>Name: Tianchi Wu            ONID: wutia</p>
-<h1 id="intro">Intro:<a class="headerlink" href="#intro" title="Permanent link"></a></h1>
+</style><title>README</title></head><body><article class="markdown-body"><h1 id="popper">Popper<a class="headerlink" href="#popper" title="Permanent link"></a></h1>
+<p>Ryan Sisco <em><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#105;&#115;&#99;&#111;&#114;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;">&#115;&#105;&#115;&#99;&#111;&#114;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;</a></em></p>
+<p>Christopher Miyasako <em><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#105;&#121;&#97;&#115;&#97;&#107;&#99;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;">&#109;&#105;&#121;&#97;&#115;&#97;&#107;&#99;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;</a></em></p>
+<p>Dakota Cleeves <em><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#108;&#101;&#101;&#118;&#101;&#115;&#100;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;">&#99;&#108;&#101;&#101;&#118;&#101;&#115;&#100;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;</a></em></p>
+<p>Tianchi Wu <em><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#119;&#117;&#116;&#105;&#97;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;">&#119;&#117;&#116;&#105;&#97;&#64;&#111;&#114;&#101;&#103;&#111;&#110;&#115;&#116;&#97;&#116;&#101;&#46;&#101;&#100;&#117;</a></em></p>
+<h2 id="intro">Intro:<a class="headerlink" href="#intro" title="Permanent link"></a></h2>
 <p>The language that we will be implementing for this project will 
 called Popper. It will have a Stack-Based language paradigm and
 will be capable of manipulating strings as lists of chars,
 handling int and boolean values, and handling functions created
 by the users.</p>
-<h1 id="expected-output">Expected Output:<a class="headerlink" href="#expected-output" title="Permanent link"></a></h1>
+<h2 id="expected-output">Expected Output:<a class="headerlink" href="#expected-output" title="Permanent link"></a></h2>
 <table>
 <thead>
 <tr>
@@ -1089,6 +1091,17 @@ by the users.</p>
 <td>PushN 12 <br/> PushN 3 <br/> Divide</td>
 <td>4</td>
 </tr>
+<tr>
+<td>PushN 12 <br/> PushN 3 <br/> Mod</td>
+<td>0</td>
+</tr>
+<tr>
+<td>PushN 12 <br/> PushN 3 <br/> ToThe</td>
+<td>1729</td>
+</tr>
+<tr>
+<td>PushN 12 <br/> PushN 3 <br/> Mod <br/> PushN 0 <br/> IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add] <br/></td>
+<td>56</td>
+</tr>
 </tbody>
-</table>
-<p>Instructions:</p></article></body></html>
+</table></article></body></html>

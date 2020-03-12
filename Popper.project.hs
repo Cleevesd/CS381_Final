@@ -18,6 +18,8 @@ import Prelude hiding (Num)
 --          ==  `subtract`
 --          ==  `tothe` (This command is for exponents like 2 tothe 3 results in 8)
 --          ==  `mod`   (This is modulo, will be done with recursion until lessthan then return)
+--          ==  `if` prog `else` prog `end` simple ifelse
+--          ==  `equal` checks if equal
 
 type Prog = [Cmd]
 
@@ -27,9 +29,11 @@ data Cmd = PushN Int
          | Multiply
          | Divide
          | Add
+         | Equal
          | Subtract
          | Tothe
          | Mod
+         | IfElse Prog Prog
   deriving (Eq, Show)
 
   cmd :: Cmd -> Domain

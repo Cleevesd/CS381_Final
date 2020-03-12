@@ -23,4 +23,6 @@ by the users.
 | PushN 12 <br/> PushN 3 <br/> Subtract |9 |
 | PushN 12 <br/> PushN 3 <br/> Multiply |36 |
 | PushN 12 <br/> PushN 3 <br/> Divide |4 |
-
+| PushN 12 <br/> PushN 3 <br/> Mod |0|
+| PushN 12 <br/> PushN 3 <br/> ToThe |1729|
+| PushN 12 <br/> PushN 3 <br/> Mod <br/> PushN 0 <br/> IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add] <br/> |56|
