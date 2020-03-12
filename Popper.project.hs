@@ -21,23 +21,87 @@ import Prelude hiding (Num)
 
 type Prog = [Cmd]
 
-data Cmd = PushN Int
-         | PushB Bool
-         | PushS String
-         | Multiply
-         | Divide
-         | Add
-         | Subtract
-         | Tothe
-         | Mod
-  deriving (Eq, Show)
-  
-  
 data Type = I Int
         | B Bool
         | S String
+        | P Prog
   deriving (Eq, Show)
 
-type Stack = [Type]
+data Cmd = Push Type
+         | Mul
+         | Sub
+         | Div
+         | Add
+         | Equ
+         | Tothe
+         | Mod
+         | IfElse
+  deriving (Eq, Show)
+  
+  
+type TypeInt = Int
 
-type Domain = Stack -> Maybe Stack
+type Stack = [Either Type TypeInt]
+
+type Domain = Stack -> (Maybe Type, Maybe Stack)
+
+-- String Concatanation
+
+stringCont :: String -> String -> Prog
+stringCont l r = [Push (S l), Push (S r), Add]
+
+catString :: Prog
+catString = stringCont "Test" "Concatanation"
+
+ex1 :: Prog
+ex1 = [Push (S "Test"), Push (S "Concatenation"), Add]
+
+ex2 :: Prog
+ex2 = [Push (I 3), Push (I 4), Mul]
+
+ex3 :: Prog
+ex3 = [Push (I 5), Push (I 4), Sub]
+
+ex4 :: Prog
+ex4 = [Push (I 12), Push (I 4), Div]
+
+
+-- 7. Define the semantics of a StackLang command (ignore If at first).
+cmd :: Cmd -> Domain
+cmd (Push i)     = \s -> (Nothing, Just (Left i : s))
+cmd Add          = \s -> case s of
+                           (Left i : Left j : s') -> case (i,j) of -- Add uses + or ++ based on if string or int
+                                                       (I i', I j') -> (Nothing, Just (Left (I (j' + i')) : s'))
+                                                       (S i', S j') -> (Nothing, Just (Left (S (j' ++ i')) : s'))
+cmd Sub          = \s -> case s of
+                           (Left i : Left j : s') -> case (i,j) of -- Add uses + or ++ based on if string or int
+                                                       (I i', I j') -> (Nothing, Just (Left (I (j' - i')) : s'))
+cmd Mul          = \s -> case s of
+                           (Left i : Left j : s') -> case i of
+                                                       (I i') -> case j of
+                                                                     (I j') -> (Nothing, Just (Left (I (j' * i')) : s'))
+cmd Div         = \s -> case s of
+                           (Left i : Left j : s') -> case i of
+                                                       (I j') -> case j of
+                                                                     (I i') -> (Nothing, Just (Left (I (i' `div` j')) : s'))
+
+
+-- 8. Define the semantics of a StackLang program.
+prog :: Prog -> Domain
+prog []    = \s -> (Nothing, Just s)
+prog (c:p) = \s -> case cmd c s of
+                     (_, Just s') -> prog p s'
+                     _ -> (Nothing, Nothing)
+
+-- | Run a program on an initially empty stack.
+--
+--   >>> run ex1
+--   (Nothing, Just [Left (S "TestConcatenation")])
+--   >>> run (genSum [1..10])
+--   Just [Left 55]
+--
+--   >>> run [PushN 3, Add, PushN 4]
+--   Nothing
+--
+run :: Prog -> (Maybe Type, Maybe Stack)
+run p = prog p []
