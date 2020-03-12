@@ -1,10 +1,10 @@
-Name: Ryan Sisco 			ONID: siscor
+Name: Ryan Sisco *siscor@oregonstate.edu*
 
-Name: Christopher Miyasako	ONID: miyasakc
+Name: Christopher Miyasako *miyasakc@oregonstate.edu*
 
-Name: Dakota Cleeves 		ONID: cleevesd
+Name: Dakota Cleeves *cleevesd@oregonstate.edu*
 
-Name: Tianchi Wu 			ONID: wutia
+Name: Tianchi Wu *wutia@oregonstate.edu*
 
 # Intro:
 The language that we will be implementing for this project will 
