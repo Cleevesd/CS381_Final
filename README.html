@@ -1066,7 +1066,7 @@ called Popper. It will have a Stack-Based language paradigm and
 will be capable of manipulating strings as lists of chars,
 handling int and boolean values, and handling functions created
 by the users.</p>
-<h2 id="expected-output">Expected Output:<a class="headerlink" href="#expected-output" title="Permanent link"></a></h2>
+<h2 id="expected">Expected:<a class="headerlink" href="#expected" title="Permanent link"></a></h2>
 <table>
 <thead>
 <tr>
@@ -1104,10 +1104,6 @@ by the users.</p>
 <td>Just [Left (I 56)]</td>
 </tr>
 <tr>
-<td>run [Push (I 12), Push (S &ldquo;myString&rdquo;), Add]</td>
-<td>Nothing</td>
-</tr>
-<tr>
 <td>run [Push (S &ldquo;Hello&rdquo;), Push (S &ldquo;World&rdquo;), Add]</td>
 <td>Just [Left (S &ldquo;HelloWorld&rdquo;)]</td>
 </tr>
@@ -1123,8 +1119,31 @@ by the users.</p>
 <td>run [Push (I 1), While [Push (B True)] [Push (I 1)]]</td>
 <td><em>Pumps the stack recurisvely, no output</em></td>
 </tr>
+</tbody>
+</table>
+<h2 id="unexpected">Unexpected:<a class="headerlink" href="#unexpected" title="Permanent link"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run [Push (I 12), Push (S &ldquo;myString&rdquo;), Add]</td>
+<td>Nothing</td>
+</tr>
 <tr>
 <td>run [Push (S &ldquo;Can&rsquo;t&rdquo;), Push (S &ldquo;Multiply&rdquo;), Mul]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>run [Dupe]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>run [Push (I 12), Mul, Push (I 12)]</td>
 <td>Nothing</td>
 </tr>
 </tbody>

@@ -177,9 +177,10 @@ cmd NEql              = \s -> case s of
 
 cmd Dupe             = \s -> case s of 
                             (Left i : s') -> Just (Left i : s)
-
+                            _ -> Nothing
 cmd Swap             = \s -> case s of
                             (Left i : Left j : s') -> Just (Left j : Left i : s')
+                            _ -> Nothing
 
 cmd (While c p)      = \s -> if ((run c) == Just [Left (B True)]) then do run p
                                                                           run ([While c p])
