@@ -1111,5 +1111,21 @@ by the users.</p>
 <td>run [Push (S &ldquo;Hello&rdquo;), Push (S &ldquo;World&rdquo;), Add]</td>
 <td>Just [Left (S &ldquo;HelloWorld&rdquo;)]</td>
 </tr>
+<tr>
+<td>run [Push (I 12), Dupe]</td>
+<td>Just [Left (I 12), Left (I 12)]</td>
+</tr>
+<tr>
+<td>run [Push (I 12), Push (I 13), Push (S &ldquo;Swapped!&rdquo;), Swap]</td>
+<td>Just [Left (I 13),Left (S &ldquo;Swapped!&rdquo;),Left (I 12)]</td>
+</tr>
+<tr>
+<td>run [Push (I 1), While [Push (B True)] [Push (I 1)]]</td>
+<td><em>Pumps the stack recurisvely, no output</em></td>
+</tr>
+<tr>
+<td>run [Push (S &ldquo;Can&rsquo;t&rdquo;), Push (S &ldquo;Multiply&rdquo;), Mul]</td>
+<td>Nothing</td>
+</tr>
 </tbody>
 </table></article></body></html>
