@@ -116,6 +116,12 @@ ex19 = [Push (I 792), Push (I 4), Mod, Push (I 0), Eql, IfElse [Push (I 4), Push
 ex20 :: Prog
 ex20 = [Push (I 20), Dupe, Add]
 
+ex21 :: Prog
+ex21 = [Push (S "test"), Dupe]
+
+ex22 :: Prog
+ex22 = [Push (B False), Dupe]
+
 -- 7. Define the semantics of a StackLang command (ignore If at first).
 cmd :: Cmd -> Domain
 cmd (Push i)     = \s -> Just (Left i : s)
@@ -161,6 +167,8 @@ cmd Eql              = \s -> case s of
 cmd Dupe             = \s -> case s of 
                             (Left i : s') -> Just (Left i : s)
 
+cmd Swap             = \s -> case s of
+                            (Left i : Left j : s') -> Just (Left j : Left i : s')
 
 -- 8. Define the semantics of a StackLang program.
 prog :: Prog -> Domain
@@ -231,3 +239,12 @@ run p = prog p []
 --
 --   >>> run ex19
 --   Just [Left (I 256)]
+--
+--   >>> run ex20
+--   Just [Left (I 40)]
+--
+--   >>> run ex21
+--   Just [Left (S "test"),Left (S "test")]
+--
+--   >>> run ex22
+--   Just [Left (B False),Left (B False)]
