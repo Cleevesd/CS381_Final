@@ -15,10 +15,11 @@ will be capable of manipulating strings as lists of chars,
 handling int and boolean values, and handling functions created
 by the users.
 
-## Expected:
+## Good Examples:
 
 | Operation | Input | Output |
 | --- | --- |---	|
+| Push | run [Push (I 12)]| Just [Left (I 12)] |
 | Add | run [Push (I 12), Push (I 3), Add] |Just [Left (I 15)] |
 | Sub | run [Push (I 12), Push (I 3), Subtract] |Just [Left (I 9)]|
 | Mul | run [Push (I 12), Push (I 3), Multiply] |Just [Left (I 36)]|
@@ -33,7 +34,7 @@ by the users.
 | NEql | run [Push (I 1), Push (I 1), NEql] | Just [Left (B False)] |
 
 
-## Unexpected:
+## Bad Examples:
 
 | Operation | Input | Output |
 | --- | --- |---	|
