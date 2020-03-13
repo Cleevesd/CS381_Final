@@ -33,10 +33,12 @@ data Cmd = Push Type
          | Sub
          | Div
          | Add
-         | Equ
+         | Eql
          | Tothe
          | Mod
          | IfElse Prog Prog
+         | Dupe
+         | Swap
   deriving (Eq, Show)
   
   
@@ -108,6 +110,12 @@ ex17 = [Push (B True), IfElse [Push (I 7), Push (I 8), Mul] [Push (I 3), Push (I
 ex18 :: Prog
 ex18 = [Push (B False), IfElse [Push (I 7), Push (I 8), Mul] [Push (I 3), Push (I 4), Add]]
 
+ex19 :: Prog
+ex19 = [Push (I 792), Push (I 4), Mod, Push (I 0), Eql, IfElse [Push (I 4), Push(I 4), Tothe] [Push (B False)]]
+
+ex20 :: Prog
+ex20 = [Push (I 20), Dupe, Add]
+
 -- 7. Define the semantics of a StackLang command (ignore If at first).
 cmd :: Cmd -> Domain
 cmd (Push i)     = \s -> Just (Left i : s)
@@ -146,12 +154,24 @@ cmd (IfElse t f)     = \s -> case s of
                         (Left (B i) : s') -> if i then prog t s' else prog f s'
                         _ -> Nothing
 
+cmd Eql              = \s -> case s of
+                           (Left i  : Left j  : s') -> (Just (Left (B (j == i)) : s'))
+                           _ -> Nothing
+
+cmd Dupe             = \s -> case s of 
+                            (Left i : s') -> Just (Left i : s)
+
+
 -- 8. Define the semantics of a StackLang program.
 prog :: Prog -> Domain
 prog []    = \s -> Just s
 prog (c:p) = \s -> case cmd c s of
                      (Just s') -> prog p s'
                      _ -> Nothing
+
+run :: Prog -> (Maybe Stack)
+run p = prog p []
+
 
 -- | Run a program on an initially empty stack.
 --
@@ -207,6 +227,7 @@ prog (c:p) = \s -> case cmd c s of
 --   Just [Left (I 56)]
 --
 --   >>> run ex18
---   Just [left (I 7)]
-run :: Prog -> (Maybe Stack)
-run p = prog p []
+--   Just [Left (I 7)]
+--
+--   >>> run ex19
+--   Just [Left (I 256)]
