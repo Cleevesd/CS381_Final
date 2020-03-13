@@ -1070,54 +1070,71 @@ by the users.</p>
 <table>
 <thead>
 <tr>
+<th>Operation</th>
 <th>Input</th>
 <th>Output</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>Add</td>
 <td>run [Push (I 12), Push (I 3), Add]</td>
 <td>Just [Left (I 15)]</td>
 </tr>
 <tr>
+<td>Sub</td>
 <td>run [Push (I 12), Push (I 3), Subtract]</td>
 <td>Just [Left (I 9)]</td>
 </tr>
 <tr>
+<td>Mul</td>
 <td>run [Push (I 12), Push (I 3), Multiply]</td>
 <td>Just [Left (I 36)]</td>
 </tr>
 <tr>
+<td>Div</td>
 <td>run [Push (I 12), Push (I 3), Divide]</td>
 <td>Just [Left (I 4)]</td>
 </tr>
 <tr>
+<td>Mod</td>
 <td>run [Push (I 12), Push (I 3), Mod]</td>
 <td>Just [Left (I 0)]</td>
 </tr>
 <tr>
+<td>Tothe</td>
 <td>run [Push (I 12), Push (I 3), ToThe]</td>
 <td>Just [Left (I 1729)]</td>
 </tr>
 <tr>
-<td>run [Push (I 12), Push (I 3), Mod, PushN 0, IfElse [PushN 7, PushN 8, Mul] [PushN 3, PushN 4, Add]]</td>
+<td>Ifelse</td>
+<td>run [Push (I 12), Push (I 3), Mod, Push (I 0), Eql, IfElse [Push (I 7), Push (I 8), Mul] [Push (I 3), Push (I 4), Add]]</td>
 <td>Just [Left (I 56)]</td>
 </tr>
 <tr>
-<td>run [Push (S &ldquo;Hello&rdquo;), Push (S &ldquo;World&rdquo;), Add]</td>
-<td>Just [Left (S &ldquo;HelloWorld&rdquo;)]</td>
-</tr>
-<tr>
+<td>Dupe</td>
 <td>run [Push (I 12), Dupe]</td>
 <td>Just [Left (I 12), Left (I 12)]</td>
 </tr>
 <tr>
+<td>Swap</td>
 <td>run [Push (I 12), Push (I 13), Push (S &ldquo;Swapped!&rdquo;), Swap]</td>
 <td>Just [Left (I 13),Left (S &ldquo;Swapped!&rdquo;),Left (I 12)]</td>
 </tr>
 <tr>
+<td>While</td>
 <td>run [Push (I 1), While [Push (B True)] [Push (I 1)]]</td>
 <td><em>Pumps the stack recurisvely, no output</em></td>
+</tr>
+<tr>
+<td>Eql</td>
+<td>run [Push (I 1), Push (I 1), Eql]</td>
+<td>Just [Left (B True)]</td>
+</tr>
+<tr>
+<td>NEql</td>
+<td>run [Push (I 1), Push (I 1), NEql]</td>
+<td>Just [Left (B False)]</td>
 </tr>
 </tbody>
 </table>
@@ -1125,25 +1142,65 @@ by the users.</p>
 <table>
 <thead>
 <tr>
+<th>Operation</th>
 <th>Input</th>
 <th>Output</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>Add</td>
 <td>run [Push (I 12), Push (S &ldquo;myString&rdquo;), Add]</td>
 <td>Nothing</td>
 </tr>
 <tr>
+<td>Sub</td>
+<td>run [Push (I 12), Push (S &ldquo;myString&rdquo;), Sub]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>Mul</td>
 <td>run [Push (S &ldquo;Can&rsquo;t&rdquo;), Push (S &ldquo;Multiply&rdquo;), Mul]</td>
 <td>Nothing</td>
 </tr>
 <tr>
+<td>Div</td>
+<td>run [Push (I 12), Push (S &ldquo;myString&rdquo;), Div]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>Tothe</td>
+<td>run [Push (I 12), Push (S &ldquo;myString&rdquo;), Tothe]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>Ifelse</td>
+<td>run [Push (I 12), Push (I 3), Mod, Push (I 0), IfElse [Push (I 7), Push (I 8), Mul] [Push (I 3), Push (I 4), Add]]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>Mod</td>
+<td>run [Push (I 12), Push (S &ldquo;myString&rdquo;), Mod]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>Dupe</td>
 <td>run [Dupe]</td>
 <td>Nothing</td>
 </tr>
 <tr>
-<td>run [Push (I 12), Mul, Push (I 12)]</td>
+<td>Swap</td>
+<td>run [Push (I 12), Swap, Push (I 12)]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>Eql</td>
+<td>run [Push (I 1), Push (S &ldquo;myString&rdquo;), Eql]</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>NEql</td>
+<td>run [Push (I 1), Push (S &ldquo;myString&rdquo;), NEql]</td>
 <td>Nothing</td>
 </tr>
 </tbody>
