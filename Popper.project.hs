@@ -34,11 +34,13 @@ data Cmd = Push Type
          | Div
          | Add
          | Eql
+         | NEql
          | Tothe
          | Mod
          | IfElse Prog Prog
          | Dupe
          | Swap
+         | While Prog Prog
   deriving (Eq, Show)
   
   
@@ -122,7 +124,13 @@ ex21 = [Push (S "test"), Dupe]
 ex22 :: Prog
 ex22 = [Push (B False), Dupe]
 
+ex23 :: Prog
+ex23 = [While [Push (I 2), Push (I 2), Eql] [Push (I 20)]]
 -- 7. Define the semantics of a StackLang command (ignore If at first).
+
+ex24 :: Prog
+ex24 = [While [Push (I 2), Push (I 5), NEql, Swap, IfElse [Push (I 1), Sub] [Push (B False)] ] [Push (I 1), Sub]]
+
 cmd :: Cmd -> Domain
 cmd (Push i)     = \s -> Just (Left i : s)
 cmd Add          = \s -> case s of
@@ -163,12 +171,19 @@ cmd (IfElse t f)     = \s -> case s of
 cmd Eql              = \s -> case s of
                            (Left i  : Left j  : s') -> (Just (Left (B (j == i)) : s'))
                            _ -> Nothing
+cmd NEql              = \s -> case s of
+                           (Left i  : Left j  : s') -> (Just (Left (B (j /= i)) : s'))
+                           _ -> Nothing
 
 cmd Dupe             = \s -> case s of 
                             (Left i : s') -> Just (Left i : s)
 
 cmd Swap             = \s -> case s of
                             (Left i : Left j : s') -> Just (Left j : Left i : s')
+
+cmd (While c p)      = \s -> if ((run c) == Just [Left (B True)]) then do run p
+                                                                          run ([While c p])
+                                                                          else Nothing
 
 -- 8. Define the semantics of a StackLang program.
 prog :: Prog -> Domain
@@ -248,3 +263,5 @@ run p = prog p []
 --
 --   >>> run ex22
 --   Just [Left (B False),Left (B False)]
+
+--   >>> run ex23
